@@ -11,7 +11,9 @@ namespace AoC2024
         static void Main(string[] args)
         {
             //Day1.Solve();
-            Day2.Solve();
+            //Day2.Solve();
+            Day3 day3 = new Day3();
+            day3.Solve();
             Console.ReadLine();
         }
     }

@@ -8,7 +8,7 @@ namespace AoC2024
 {
     internal class Day2 : AoC2024
     {
-        new public static void Solve()
+        public override void Solve()
         {
             Day2 day2 = new Day2();
             Console.WriteLine(day2.Part1(day2));
