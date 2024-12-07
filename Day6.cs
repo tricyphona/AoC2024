@@ -14,7 +14,8 @@ namespace AoC2024
         public override void Solve()
         {
             int[] start_positie = new int[2] { 0,0 };
-            string[] puzzleInput = this.ReadPuzzleInput("C:\\Users\\pnl14s5t\\source\\repos\\AoC2024\\input\\Day6.txt");
+            string[] puzzleInput = this.ReadPuzzleInput("C:\\projects\\AoC2024\\input\\Dag_6.txt"); 
+            //string[] puzzleInput = this.ReadPuzzleInput("C:\\Users\\pnl14s5t\\source\\repos\\AoC2024\\input\\Day6.txt");
             int[,] play_board = new int[puzzleInput.Length, puzzleInput[0].Length];
             for (int i = 0; i < puzzleInput.Length; i++)
             {
@@ -30,7 +31,7 @@ namespace AoC2024
                     }
                     else if (puzzleInput[i][j] == '^')
                     {
-                        play_board[i, j] = 11;
+                        play_board[i, j] = 2;
                         start_positie[0] = i;
                         start_positie[1] = j;
                     }
@@ -42,6 +43,7 @@ namespace AoC2024
             while (!guard.Walk())
             {}
             Console.WriteLine(guard.GetPlacesVisited());
+            Console.ReadLine();
         }
         
     }
@@ -68,32 +70,35 @@ namespace AoC2024
         }
         private bool CheckLocation()
         {
-            Console.Write(this.i);
-            Console.Write(", ");
-            Console.WriteLine(this.j);
+            //Console.Write(this.i);
+            //Console.Write(", ");
+            //Console.WriteLine(this.j);
             if (this.i + this.direction[0] < 0 
-                || this.i + this.direction[0] >= this.play_board.GetLength(0) 
+                || this.i + this.direction[0] >= this.play_board.GetLength(0)
                 || this.j + this.direction[1] < 0 
                 || this.j + this.direction[1] >= this.play_board.GetLength(1))
             {
                 return true;
             }
-                if (this.play_board[this.i + this.direction[0], this.j + this.direction[1]] == 0)
+            int board_value = this.play_board[this.i + this.direction[0], this.j + this.direction[1]];
+                if (board_value == 0)
             {
                 int multiplier = 1;
-                if (this.direction[0] < 0) { multiplier = 11; }
+                if (this.direction[0] < 0) { multiplier = 2; }
                 else if (this.direction[1] > 0) { multiplier = 3; }
                 else if (this.direction[0] > 0) { multiplier = 5; }
                 else if (this.direction[1] < 0) { multiplier = 7; }
-                this.play_board[this.i, this.j] = multiplier;
+                else { }
+                this.play_board[this.i + this.direction[0], this.j + this.direction[1]] = multiplier;
+                //this.play_board[this.i + this.direction[0], this.j + this.direction[1]] = 2;
                 this.places_visited++;
                 this.i += this.direction[0];
                 this.j += this.direction[1];
             }
-            else if (this.play_board[this.i + this.direction[0], this.j + this.direction[1]] >= 2)
+            else if (board_value >= 2)
             {
                 int multiplier = 1;
-                if (this.direction[0] < 0) { multiplier = 11; }
+                if (this.direction[0] < 0) { multiplier = 2; }
                 else if (this.direction[1] > 0) { multiplier = 3; }
                 else if (this.direction[0] > 0) { multiplier = 5; }
                 else if (this.direction[1] < 0) { multiplier = 7; }
@@ -108,7 +113,7 @@ namespace AoC2024
                 this.i += this.direction[0];
                 this.j += this.direction[1];
             }
-            else if (this.play_board[this.i + this.direction[0], this.j + this.direction[1]] == 1)
+            else if (board_value == 1)
             {
                 int k = this.direction[0];
                 int l = this.direction[1];
