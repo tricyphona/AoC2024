@@ -17,7 +17,7 @@ namespace AoC2024
         }
         public int Part1(Day1 self)
         {
-            string[] puzzle_input = self.ReadPuzzleInput("C:\\projects\\AoC2024\\input\\dag_1.txt");
+            string[] puzzle_input = self.ReadPuzzleInput("C:\\Users\\pnl14s5t\\source\\repos\\AoC2024\\input\\Day1.txt");
             (List<int>, List<int>) columns = self.DivideInTwoColumns(puzzle_input);
             List<int> left_column = columns.Item1;
             List<int> right_column = columns.Item2;
@@ -33,7 +33,7 @@ namespace AoC2024
         }
         public int Part2(Day1 self)
         {
-            string[] puzzle_input = self.ReadPuzzleInput("C:\\projects\\AoC2024\\input\\dag_1.txt");
+            string[] puzzle_input = self.ReadPuzzleInput("C:\\Users\\pnl14s5t\\source\\repos\\AoC2024\\input\\Day1.txt");
             (List<int>, List<int>) columns = self.DivideInTwoColumns(puzzle_input);
             List<int> left_column = columns.Item1;
             List<int> right_column = columns.Item2;

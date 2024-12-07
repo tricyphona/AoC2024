@@ -10,14 +10,12 @@ namespace AoC2024
     {
         public override void Solve()
         {
-            Day2 day2 = new Day2();
-            Console.WriteLine(day2.Part1(day2));
- //Console.WriteLine(day1.Part2(day1));
+            Console.WriteLine(this.Part1());
         }
-        public int Part1(Day2 self)
+        public int Part1()
         {
             int safe_reports = 0;
-            string[] puzzle_input = self.ReadPuzzleInput("C:\\projects\\AoC2024\\input\\dag_2.txt");
+            string[] puzzle_input = this.ReadPuzzleInput("C:\\Users\\pnl14s5t\\source\\repos\\AoC2024\\input\\Day2.txt");
             List<Report> reports = new List<Report>();
             foreach (string line in puzzle_input)
             {

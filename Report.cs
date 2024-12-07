@@ -83,9 +83,9 @@ namespace AoC2024
                             return true;
                         }
                         this.safe = false;
-                        Console.Write(String.Join(", ", this.levels));
-                        Console.Write("\t");
-                        Console.WriteLine(i);
+                        //Console.Write(String.Join(", ", this.levels));
+                        //Console.Write("\t");
+                        //Console.WriteLine(i);
                         return false;
                     }
                 }
