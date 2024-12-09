@@ -11,8 +11,8 @@ namespace AoC2024
     {
         public override void Solve()
         {
-            //string[] puzzleInput = this.ReadPuzzleInput("C:\\projects\\AoC2024\\input\\Day9.txt");
-            string[] puzzleInput = this.ReadPuzzleInput("C:\\Users\\pnl14s5t\\source\\repos\\AoC2024\\input\\Day9_test.txt");
+            string[] puzzleInput = this.ReadPuzzleInput("C:\\projects\\AoC2024\\input\\Dag9.txt");
+            //string[] puzzleInput = this.ReadPuzzleInput("C:\\Users\\pnl14s5t\\source\\repos\\AoC2024\\input\\Day9_test.txt");
             LinkedList<Storage> totalStorage = new LinkedList<Storage>();
             Console.WriteLine(puzzleInput[0]);
             bool flag_file = true;
@@ -121,12 +121,13 @@ namespace AoC2024
             storageBlock = storagesPart2.Last;
             while (storageBlock != storagesPart2.First)
             {
-                if (!storageBlock.Value.empty)
+                bool moved = false;
+                if (storageBlock != null && !storageBlock.Value.empty)
                 {
                     Int64 lengthNeeded = storageBlock.Value.length;
                     LinkedListNode<Storage> possibleOption = storagesPart2.First;
                     bool looking = true;
-                    bool moved = false;
+                    
                     while (looking && possibleOption != null)
                     {
                         if (possibleOption.Value.empty && possibleOption.Value.length >= lengthNeeded)
@@ -141,26 +142,32 @@ namespace AoC2024
                                 storagesPart2.Remove(possibleOption.Value);
                             }
                         }
-                        else
+                        else if(possibleOption.Next != storageBlock)
                         {
                             possibleOption = possibleOption.Next;
+                        }
+                        else
+                        {
+                            looking = false;
                         }
                     }
                     if (moved)
                     {
-                        
+
                         bool emptyAfter = false;
                         bool emptyBefore = false;
+                        bool deleteNode = true;
                         if (storageBlock.Next != null && storageBlock.Next.Value.empty)
                         {
                             emptyAfter = true;
                         }
-                        
+
                         if (storageBlock.Next != null && storageBlock.Previous.Value.empty)
                         {
                             emptyBefore = true;
                         }
-                        if (emptyAfter && emptyBefore) {
+                        if (emptyAfter && emptyBefore)
+                        {
                             LinkedListNode<Storage> newEmpty = storageBlock.Previous;
                             newEmpty.Value.endId = storageBlock.Next.Value.endId;
                             newEmpty.Value.length += storageBlock.Value.length + storageBlock.Next.Value.length;
@@ -168,32 +175,58 @@ namespace AoC2024
 
                         }
 
-                        else if (emptyAfter) {
+                        else if (emptyAfter)
+                        {
                             storageBlock.Next.Value.startId = storageBlock.Value.startId;
                             storageBlock.Next.Value.length += storageBlock.Value.length;
                         }
-                        else if (emptyBefore) {
+                        else if (emptyBefore)
+                        {
                             storageBlock.Previous.Value.endId = storageBlock.Value.endId;
                             storageBlock.Previous.Value.length += storageBlock.Value.length;
                         }
-
-                        storagesPart2.Remove(storageBlock);
-                        
+                        else
+                        {
+                            deleteNode = false;
+                            storageBlock.Value.storageId = -1;
+                            storageBlock.Value.empty = true;
+                        }
+                        if (deleteNode)
+                        {
+                            LinkedListNode<Storage> old_storageBlock = storageBlock;
+                            storageBlock = storageBlock.Previous;
+                            storagesPart2.Remove(old_storageBlock);
+                        }
+                        else
+                        {
+                            storageBlock = storageBlock.Previous;
+                        }
                     }
+
                 }
-                if (storageBlock.Previous != null)
+                if(!moved)
                 {
                     storageBlock = storageBlock.Previous;
-                }
-                else
-                {
-                    storageBlock = storagesPart2.Last;
                 }
             }
             foreach(Storage storage in storagesPart2)
             {
                 Console.WriteLine(storage.startId + " " + storage.endId + " " + storage.storageId + " " + storage.empty);
             }
+            total = 0;
+            foreach (Storage storage in storagesPart2)
+            {
+                if (storage.storageId > 0)
+                {
+                    for (Int64 i = storage.startId; i < storage.endId; i++)
+                    {
+                        total += i * storage.storageId;
+                        //Console.WriteLine(total);
+                    }
+                }
+            }
+            Console.WriteLine(total);
+            Console.ReadLine();
 
         }
 
