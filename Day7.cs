@@ -17,7 +17,7 @@ namespace AoC2024
             {
                 Int64 number;
                 Int64 solution;
-                
+
                 string[] stuff = line.Split(':');
                 Int64.TryParse(stuff[0].Trim(), out solution);
                 Console.WriteLine(solution);
@@ -35,7 +35,8 @@ namespace AoC2024
                 LinkedList<Int64> possibleValues = new LinkedList<Int64>();
                 foreach (Int64 value in values)
                 {
-                    if (possibleValues.First == null) {
+                    if (possibleValues.First == null)
+                    {
                         possibleValues.AddLast(value);
                     }
                     else
@@ -60,6 +61,5 @@ namespace AoC2024
             Console.WriteLine(sumSolutions);
             Console.ReadLine();
         }
-        
     }
 }

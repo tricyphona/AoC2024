@@ -25,8 +25,10 @@ namespace AoC2024
             //day5.Solve();
             //Day6 day6 = new Day6();
             //day6.Solve();
-            Day7 day7 = new Day7();
-            day7.Solve();
+            //Day7 day7 = new Day7();
+            //day7.Solve();
+            Day8 day8 = new Day8();
+            day8.Solve();
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
         }
